@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?define Manufacturer = "My Company" ?>
+    <?define UpgradeCode = "Some UUID" ?>
+    <?define WebsiteURL = "https://example.com" ?>
+
+    <?if $(var.Platform) = x64 ?>
+    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+    <?else ?>
+    <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+    <?endif ?>
+
+    <Product Name='$(var.ProductName)' Id="*"
+             UpgradeCode="$(var.UpgradeCode)"
+             Language='1033' Codepage='1252' Version='$(var.Version)'
+             Manufacturer='$(var.Manufacturer)'>
+
+        <Package Id='*' Keywords='Installer' Description="[ProductName] Installer"
+                     Comments='Windows Installer Package' Manufacturer='[Manufacturer]'
+                     Languages='1033' Compressed='yes' SummaryCodepage='1252'
+                     InstallScope='perMachine' InstallerVersion='301' />
+
+        <MajorUpgrade DowngradeErrorMessage='A newer version of [ProductName] is already installed.' />
+        <!-- Set properties for add/remove programs -->
+        <Media Id='1' Cabinet='files.cab' EmbedCab='yes' CompressionLevel="high" />
+
+        <!-- stuff -->
+        <Property Id="INSTALLDIR">
+            <RegistrySearch Id='DetermineInstallLocation' Type='raw' Root='HKLM' Key='Software\[Manufacturer]\[ProductName]' Name='InstallDir' />
+        </Property>
+
+        <Directory Id='TARGETDIR' Name='SourceDir'>
+            <Directory Id='$(var.PlatformProgramFilesFolder)' Name='PFiles'>
+                <Directory Id='ManufactorerFolder' Name='$(var.Manufacturer)'>
+                  <Directory Id='INSTALLDIR' Name='$(var.ProductName) $(var.ShortVersion)'>
+                      <Component Id='MainExecutable' Guid='{C4863B41-9BA5-48B4-BB9B-3B1F8FC773FE}'>
+                          <File Id='AppExe' Source='$(var.InstallRoot)\app.exe' KeyPath='yes' />
+                          <File Id="qt__conf" Source="$(var.InstallRoot)\qt.conf" />
+
+                          <File Id="qt5__core" Source="$(var.InstallRoot)\Qt5Core.dll" />
+                          <File Id="qt5__gui" Source="$(var.InstallRoot)\Qt5Gui.dll" />
+                          <File Id="qt5__network" Source="$(var.InstallRoot)\Qt5Network.dll" />
+                          <File Id="qt5__qml" Source="$(var.InstallRoot)\Qt5Qml.dll" />
+                          <File Id="qt5__quick" Source="$(var.InstallRoot)\Qt5Quick.dll" />
+                          <File Id="qt5__quickcontrols2" Source="$(var.InstallRoot)\Qt5QuickControls2.dll" />
+                          <File Id="qt5__quicktemplates2" Source="$(var.InstallRoot)\Qt5QuickTemplates2.dll" />
+                          <File Id="qt5__sql" Source="$(var.InstallRoot)\Qt5Sql.dll" />
+                          <File Id="qt5__svg" Source="$(var.InstallRoot)\Qt5Svg.dll" />
+                          <File Id="qt5__widgets" Source="$(var.InstallRoot)\Qt5Widgets.dll" />
+
+                          <File Id="qt5__egl" Source="$(var.InstallRoot)\libEGL.dll" />
+                          <File Id="qt5__gles" Source="$(var.InstallRoot)\libGLESv2.dll" />
+                          <File Id="qt5__d3dcompiler" Source="$(var.InstallRoot)\d3dcompiler_47.dll" />
+
+                          <RegistryKey Root='HKLM' Key='Software\[Manufacturer]\[ProductName]'>
+                            <RegistryValue Type='string' Name='InstallDir' Value='[INSTALLDIR]'/>
+                          </RegistryKey>
+                      </Component>
+
+                      <Component Id='Resources' Guid='{F6CF3C6A-F877-4BD7-B2F1-8A58F69C3736}'>
+                          <File Id="some_file_txt" Source="$(var.InstallRoot)\some-file.txt" />
+                      </Component>
+
+                      <Directory Id="dir__plugins" Name="plugins">
+                          <Directory Id="dir__imgeformats" Name="imageformats">
+                              <Component Id="ImageFormats" Guid="{352442DC-7AB9-4F6E-8964-FCDB6062A5CB}">
+                                  <File Id="formats__gif" Source="$(var.InstallRoot)\plugins\imageformats\qgif.dll" />
+                                  <File Id="formats__icns" Source="$(var.InstallRoot)\plugins\imageformats\qicns.dll" />
+                                  <File Id="formats__ico" Source="$(var.InstallRoot)\plugins\imageformats\qico.dll" />
+                                  <File Id="formats__jpg" Source="$(var.InstallRoot)\plugins\imageformats\qjpeg.dll" />
+                                  <File Id="formats__tiff" Source="$(var.InstallRoot)\plugins\imageformats\qtiff.dll" />
+                                  <File Id="formats__wbmp" Source="$(var.InstallRoot)\plugins\imageformats\qwbmp.dll" />
+                                  <File Id="formats__webp" Source="$(var.InstallRoot)\plugins\imageformats\qwebp.dll" />
+                                  <File Id="formats__svg" Source="$(var.InstallRoot)\plugins\imageformats\qsvg.dll" />
+                              </Component>
+                          </Directory>
+
+                          <Directory Id="dir__platforms" Name="platforms">
+                              <Component Id="Platforms" Guid="{8517EDEF-ED22-40B5-A4DF-CFFA4D72F008}">
+                                  <File Id="platforms__windows" Source="$(var.InstallRoot)\plugins\platforms\qwindows.dll" />
+                              </Component>
+                          </Directory>
+
+                      </Directory>
+
+                      <Directory Id="dir__mycompany" Name="MyCompany">
+                          <Directory Id="dir__counterplugin" Name="CounterPlugin">
+                              <Component Id="CounterPlugin" Guid="{B0232EA5-1322-4D71-BD08-F990E9CF06F7}">
+                                  <File Id="counterplugin_dll" Source="$(var.InstallRoot)\MyCompany\CounterPlugin\counter_plugin.dll" />
+                                  <File Id="counterpluginqmldir" Source="$(var.InstallRoot)\MyCompany\CounterPlugin\qmldir" />
+                              </Component>
+                          </Directory>
+                      </Directory>
+
+                  </Directory>
+                </Directory>
+            </Directory>
+
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName) $(var.ShortVersion)" />
+            </Directory>
+            <Directory Id="DesktopFolder" Name="Desktop" />
+        </Directory>
+
+        <Feature Id='Complete' Level='1' Title="My App" Description="The application."
+                 ConfigurableDirectory='INSTALLDIR' AllowAdvertise='no' Absent='disallow'>
+            <ComponentRef Id='MainExecutable' />
+            <ComponentRef Id='Resources' />
+            <ComponentRef Id='ImageFormats' />
+            <ComponentRef Id='Platforms' />
+            <ComponentRef Id='CounterPlugin' />
+            <ComponentGroupRef Id='QtQml' />
+        </Feature>
+
+        <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+        <UIRef Id="WixUI_InstallDir" />
+
+        <WixVariable Id="WixUILicenseRtf" Value="$(var.RootDir)\dist\win\license.rtf" />
+
+        <!-- Microsoft redistributable -->
+        <DirectoryRef Id="TARGETDIR">
+            <Merge Id="VCRedist" SourceFile="$(var.VcInstallDir)\Redist\MSVC\14.13.26020\MergeModules\Microsoft_VC141_CRT_$(var.Platform).msm" DiskId="1" Language="0"/>
+        </DirectoryRef>
+
+        <Feature Id="VCRedist" Title="Visual C++ 2017 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+            <MergeRef Id="VCRedist"/>
+        </Feature>
+
+    </Product>
+</Wix>

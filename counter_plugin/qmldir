@@ -1,0 +1,2 @@
+module MyCompany.Counter
+plugin counter_plugin
