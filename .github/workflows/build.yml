@@ -3,7 +3,7 @@ name: build
 on:
   push:
     branches:
-      - 'master'
+      - master
   schedule:
     # Every 10 hours
     - cron: '* */10 * * *'
