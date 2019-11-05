@@ -8,9 +8,6 @@ on:
     # Every 10 hours
     - cron: '* */10 * * *'
 
-env:
-  QBS_DIR: Qt/Tools/QtCreator/bin/
-
 jobs:
   windows-build:
     timeout-minutes: 15
