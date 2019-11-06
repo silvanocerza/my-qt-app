@@ -27,11 +27,6 @@ jobs:
         shell: cmd
         run: mkdir build
 
-      - name: Echo current dir
-        working-directory: build
-        shell: cmd
-        run: cd
-
       - name: Install Qt
         working-directory: build
         shell: cmd
