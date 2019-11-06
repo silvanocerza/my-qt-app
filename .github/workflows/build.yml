@@ -43,11 +43,11 @@ jobs:
         working-directory: build
         shell: cmd
         run: |
-          Qt/Tools/QtCreator/bin/qbs.exe setup-toolchains --detect
-          Qt/Tools/QtCreator/bin/qbs.exe setup-qt ./Qt/5.9.8/msvc2017_64/bin/qmake.exe qt-5-9-8
+          .\Qt\Tools\QtCreator\bin\qbs.exe setup-toolchains --detect
+          .\Qt\Tools\QtCreator\bin\qbs.exe setup-qt .\Qt\5.9.8\msvc2017_64\bin\qmake.exe qt-5-9-8
 
       - name: Compile and create installer
         working-directory: build
         shell: cmd
         run: |
-          Qt/Tools/QtCreator/bin/qbs.exe build -p installer profile:qt-5-9-8 config:release
+          .\Qt\Tools\QtCreator\bin\qbs.exe build -p installer profile:qt-5-9-8 config:release
