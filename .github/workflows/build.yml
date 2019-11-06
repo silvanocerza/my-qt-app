@@ -38,7 +38,7 @@ jobs:
         working-directory: build
         shell: cmd
         run: |
-          tree .\Qt
+          tree .\Qt /F
 
       - name: Setup Qbs
         working-directory: build
