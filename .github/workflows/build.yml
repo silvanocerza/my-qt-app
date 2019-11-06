@@ -38,7 +38,7 @@ jobs:
         working-directory: build
         shell: cmd
         run: |
-          dir .\Qt\5.9.8\msvc2017_64\bin\
+          tree .\Qt
 
       - name: Setup Qbs
         working-directory: build
