@@ -20,8 +20,12 @@ Controller.prototype.DynamicTelemetryPluginFormCallback = function() {
 
 Controller.prototype.CredentialsPageCallback = function() {
     var page = gui.pageWidgetByObjectName("CredentialsPage");
-    page.EmailLineEdit.setText("{{ qt_email }}");
-    page.PasswordLineEdit.setText("{{ qt_password }}");
+
+    var username = installer.environmentVariable("QT_ACCOUNT_USERNAME");
+    var password = installer.environmentVariable("QT_ACCOUNT_PASSWORD");
+    page.loginWidget.EmailLineEdit.setText(username);
+    page.loginWidget.PasswordLineEdit.setText(password);
+
     gui.clickButton(buttons.NextButton);
 }
 

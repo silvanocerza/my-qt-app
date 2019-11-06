@@ -8,6 +8,12 @@ on:
     # Every 10 hours
     - cron: '* */10 * * *'
 
+# env:
+  # These environments are used by the qt-installer.qs script
+  # to login when installing Qt
+  # QT_ACCOUNT_USERNAME: "my_qt_username"
+  # QT_ACCOUNT_PASSWORD: "my_qt_password"
+
 jobs:
   windows-build:
     timeout-minutes: 15
