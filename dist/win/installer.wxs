@@ -86,8 +86,8 @@
                       <Directory Id="dir__mycompany" Name="MyCompany">
                           <Directory Id="dir__counterplugin" Name="CounterPlugin">
                               <Component Id="CounterPlugin" Guid="{B0232EA5-1322-4D71-BD08-F990E9CF06F7}">
-                                  <File Id="counterplugin_dll" Source="$(var.InstallRoot)\MyCompany\CounterPlugin\counter_plugin.dll" />
-                                  <File Id="counterpluginqmldir" Source="$(var.InstallRoot)\MyCompany\CounterPlugin\qmldir" />
+                                  <File Id="counterplugin_dll" Source="$(var.InstallRoot)\MyCompany\Counter\counter_plugin.dll" />
+                                  <File Id="counterpluginqmldir" Source="$(var.InstallRoot)\MyCompany\Counter\qmldir" />
                               </Component>
                           </Directory>
                       </Directory>

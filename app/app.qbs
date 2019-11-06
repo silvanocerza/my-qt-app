@@ -30,4 +30,11 @@ Application {
         qbs.install: true
         qbs.installPrefix: ""
     }
+
+    Group {
+        name: "Some file"
+        files: "../dist/some-file.txt"
+        qbs.install: true
+        qbs.installPrefix: ""
+    }
 }
