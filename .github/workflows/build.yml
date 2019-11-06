@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - master
-  schedule:
-    # Every 10 hours
-    - cron: '* */10 * * *'
+  # schedule:
+  #   # Every 10 hours
+  #   - cron: '* */10 * * *'
 
 # env:
   # These environments are used by the qt-installer.qs script
