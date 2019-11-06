@@ -53,17 +53,17 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
     widget.deselectAll();
 
     if (installer.value("os") === "win") {
-        widget.selectComponent("qt.qt59.win64_msvc2017_64");
+        widget.selectComponent("qt.qt5.598.win64_msvc2017_64");
     } else if (installer.value("os") === "x11") {
-        widget.selectComponent("qt.qt59.gcc_64");
+        widget.selectComponent("qt.qt5.598.gcc_64");
     } else if (installer.value("os") === "macos") {
-        widget.selectComponent("qt.qt59.clang_64");
+        widget.selectComponent("qt.qt5.598.clang_64");
     }
 
-    widget.selectComponent("qt.59.qtwebengine");
-    widget.selectComponent("qt.59.qtgamepad");
-    widget.selectComponent("qt.59.qtscxml");
-    widget.selectComponent("qt.59.qtserialbus");
+    widget.selectComponent("qt.qt5.598.qtwebengine");
+    widget.selectComponent("qt.qt5.598.qtgamepad");
+    widget.selectComponent("qt.qt5.598.qtscxml");
+    widget.selectComponent("qt.qt5.598.qtserialbus");
     widget.selectComponent("qt.enterpriseaddons");
 
     widget.deselectComponent("qt.license");
