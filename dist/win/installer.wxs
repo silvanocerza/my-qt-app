@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <?define Manufacturer = "My Company" ?>
-    <?define UpgradeCode = "Some UUID" ?>
+    <?define UpgradeCode = "7F84A6AB-86D3-4F48-8969-F251B03FD4CC" ?>
     <?define WebsiteURL = "https://example.com" ?>
 
     <?if $(var.Platform) = x64 ?>
