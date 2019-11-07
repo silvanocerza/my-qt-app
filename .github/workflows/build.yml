@@ -42,7 +42,7 @@ jobs:
           .\Qt\Tools\QtCreator\bin\qbs.exe setup-qt .\Qt\5.9.8\msvc2017_64\bin\qmake.exe qt-5-9-8
 
       - name: Install VC Redistributable Merge Modules
-        shell: cmd
+        shell: powershell
         run: |
           "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" --quiet --norestart --add Microsoft.VisualStudio.Component.VC.Redist.MSM
 
