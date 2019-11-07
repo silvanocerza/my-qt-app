@@ -23,31 +23,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Test
+      - name: Create build directory
+        shell: cmd
+        run: mkdir build
+
+      - name: Install Qt
+        working-directory: build
         shell: cmd
         run: |
-          tree "C:\Program Files (x86)\Microsoft Visual Studio" /F
+          curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
+          qt-unified-windows-x86-online.exe --verbose --script ..\ci\qt-installer.qs
 
-      # - name: Create build directory
-      #   shell: cmd
-      #   run: mkdir build
+      - name: Setup Qbs
+        working-directory: build
+        shell: cmd
+        run: |
+          .\Qt\Tools\QtCreator\bin\qbs.exe setup-toolchains --detect
+          .\Qt\Tools\QtCreator\bin\qbs.exe setup-qt .\Qt\5.9.8\msvc2017_64\bin\qmake.exe qt-5-9-8
 
-      # - name: Install Qt
-      #   working-directory: build
-      #   shell: cmd
-      #   run: |
-      #     curl -vLo qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
-      #     qt-unified-windows-x86-online.exe --verbose --script ..\ci\qt-installer.qs
+      - name: Install VC Redistributable Merge Modules
+        shell: cmd
+        run: |
+          "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" --quiet --norestart --add Microsoft.VisualStudio.Component.VC.Redist.MSM
 
-      # - name: Setup Qbs
-      #   working-directory: build
-      #   shell: cmd
-      #   run: |
-      #     .\Qt\Tools\QtCreator\bin\qbs.exe setup-toolchains --detect
-      #     .\Qt\Tools\QtCreator\bin\qbs.exe setup-qt .\Qt\5.9.8\msvc2017_64\bin\qmake.exe qt-5-9-8
-
-      # - name: Compile and create installer
-      #   working-directory: build
-      #   shell: cmd
-      #   run: |
-      #     .\Qt\Tools\QtCreator\bin\qbs.exe build -p installer profile:qt-5-9-8 config:release -f ..
+      - name: Compile and create installer
+        working-directory: build
+        shell: cmd
+        run: |
+          .\Qt\Tools\QtCreator\bin\qbs.exe build -p installer profile:qt-5-9-8 config:release -f ..
