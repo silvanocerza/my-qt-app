@@ -44,7 +44,7 @@ jobs:
       - name: Test
         shell: cmd
         run: |
-          tree "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC" /F
+          tree "C:\Program Files (x86)\Microsoft Visual Studio\" /F
 
       - name: Compile and create installer
         working-directory: build
