@@ -41,6 +41,11 @@ jobs:
           .\Qt\Tools\QtCreator\bin\qbs.exe setup-toolchains --detect
           .\Qt\Tools\QtCreator\bin\qbs.exe setup-qt .\Qt\5.9.8\msvc2017_64\bin\qmake.exe qt-5-9-8
 
+      - name: Test
+        shell: cmd
+        run: |
+          tree "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC" /F
+
       - name: Compile and create installer
         working-directory: build
         shell: cmd
