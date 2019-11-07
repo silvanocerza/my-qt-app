@@ -119,7 +119,7 @@
 
         <!-- Microsoft redistributable -->
         <DirectoryRef Id="TARGETDIR">
-            <Merge Id="VCRedist" SourceFile="$(var.VcInstallDir)\Redist\MSVC\14.16.27012\MergeModules\Microsoft_VC141_CRT_$(var.Platform).msm" DiskId="1" Language="0"/>
+            <Merge Id="VCRedist" SourceFile="$(var.VcInstallDir)\Redist\MSVC\14.23.28105\MergeModules\Microsoft_VC141_CRT_$(var.Platform).msm" DiskId="1" Language="0"/>
         </DirectoryRef>
 
         <Feature Id="VCRedist" Title="Visual C++ 2017 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
