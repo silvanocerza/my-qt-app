@@ -45,4 +45,4 @@ jobs:
         working-directory: build
         shell: cmd
         run: |
-          .\Qt\Tools\QtCreator\bin\qbs.exe build -p installer profile:qt-5-9-8 config:release -f ..
+          .\Qt\Tools\QtCreator\bin\qbs.exe build -p archive profile:qt-5-9-8 config:release -f ..
