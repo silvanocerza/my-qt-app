@@ -117,14 +117,6 @@
 
         <WixVariable Id="WixUILicenseRtf" Value="$(var.RootDir)\dist\win\license.rtf" />
 
-        <!-- Microsoft redistributable -->
-        <DirectoryRef Id="TARGETDIR">
-            <Merge Id="VCRedist" SourceFile="$(var.VcInstallDir)\Redist\MSVC\14.23.28105\vcredist_$(var.Platform).exe" DiskId="1" Language="0"/>
-        </DirectoryRef>
-
-        <Feature Id="VCRedist" Title="Visual C++ 2017 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
-            <MergeRef Id="VCRedist"/>
-        </Feature>
 
     </Product>
 </Wix>
